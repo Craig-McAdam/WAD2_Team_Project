@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+<!--{load GameRate_template_tags %}-->
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <title>
+            GameRate -
+            {% block title_block %}
+                <!-- page title goes here -->
+            {% endblock %}
+        </title>
+
+    </head>
+
+    <body>
+
+        <div>
+            {% block body_block %}
+                <!-- page content goes here -->
+            {% endblock %}
+        </div>
+
+    </body>
+
+</html>
