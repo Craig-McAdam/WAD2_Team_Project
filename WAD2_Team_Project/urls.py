@@ -25,4 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('gamerate/', include('gamerate.urls')),
+    # remove before final submission
+    path('testing/', views.testing),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,7 +15,7 @@ class User(models.Model):
 
 
 class Game(models.Model):
-    id = models.IntegerField(unique=True)
+    id = models.IntegerField(unique=True, primary_key=True)
     name = models.CharField(max_length=64)
     release_date = models.DateField
     category = models.CharField(max_length=64)

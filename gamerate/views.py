@@ -54,3 +54,10 @@ def user_logout(request):
     return redirect(reverse('gamerate:home'))
 
 # views and templates needed for category pages
+
+# remove before final submission
+def testing(request):
+    # space to test code
+    context_dict = {}
+    response = render(request, 'gamerate/testing.html', context=context_dict)
+    return response

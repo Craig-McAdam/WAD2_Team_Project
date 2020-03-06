@@ -13,4 +13,5 @@ urlpatterns = [
     # path needed for add_game
     path('logout/', views.user_logout, name='logout'),
     # paths needed for category pages
+
 ]
