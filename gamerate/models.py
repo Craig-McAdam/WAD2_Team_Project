@@ -1,11 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
+#from django.template.defaultfilters import slugify
 
-class User(models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     date_of_birth = models.DateField
-    profile_images = models.ImageField(upload_to='profile_images', blank=True)
+    profile_image = models.ImageField(upload_to='profile_images', blank=True)
 
     class Meta:
         verbose_name_plural = 'Users'
