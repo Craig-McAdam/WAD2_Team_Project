@@ -9,8 +9,8 @@ class UserForm(forms.ModelForm):
         model = User
         fields = {'username', 'password',}
 
-class UserProfileForm(forms.modelForm):
+class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        fields = {'profile_images'}
+        fields = {'profile_image'}
