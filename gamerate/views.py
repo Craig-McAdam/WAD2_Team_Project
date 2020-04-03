@@ -164,6 +164,8 @@ def show_game(request, game_name_slug):
     context_dict ={}
     category_list = Category.objects.order_by('name')[:10]
     context_dict['categories'] = category_list
+    review_list = Review.objects.order_by('rating')[:10]
+    context_dict['reviews'] = review_list
     try:
         game = Game.objects.get(slug=game_name_slug)
         context_dict['game'] = game

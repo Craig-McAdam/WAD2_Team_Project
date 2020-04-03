@@ -28,7 +28,15 @@
       <a href="{% url 'gamerate:add_review' game.slug %}">Add Review</a> <br/>
     {% endif %}
     </gamepagecontent>
-
+    {% if reviews %}
+    {% for review in reviews %}
+    <reviews>
+    Reviewer: {{review.user}}<br>
+    Rating: {{review.rating}}<br>
+    Comment: {{review.comment}}
+    </reviews>
+    {% endfor %}
+    {% endif %}
   {% else %}
       The specified game does not exist.
   {% endif %}
