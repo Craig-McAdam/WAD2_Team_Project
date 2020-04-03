@@ -27,7 +27,7 @@
                 <ul>
                   {% if user.is_authenticated %}
                   <li>Username: {{request.user.username}}</li>
-                  <li><a href="{% url 'gamerate:home' %}">Logout</a></li>
+                  <li><a href="{% url 'gamerate:logout' %}">Logout</a></li>
                   {% else %}
                   <li><a href="{% url 'gamerate:register' %}">Register </a></li>
                   <li><a href="{% url 'gamerate:login' %}">Login </a></li>
