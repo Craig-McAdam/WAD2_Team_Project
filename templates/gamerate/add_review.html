@@ -1,13 +1,13 @@
 {% extends 'gamerate/base.html' %}
 
 {% block title_block %}
-    Add a Game
+    Add a Review
 {% endblock %}
 
 {% block body_block %}
-    <h1>Add a Game</h1>
+    <h1>Add a Review</h1>
     <div>
-      <form id="game_form" action="/gamerate/add_game/" method="post">
+      <form id="add_review_form" action="/gamerate/game/{{game.slug}}/add_review/" method="post">
         {% csrf_token %}
         {% for hidden in form.hidden_fields %}
           {{hidden}}
@@ -18,8 +18,7 @@
           {{ field }}
           <br>
         {% endfor %}
-        <input type="submit" name="submit" value="Create Game" />
+        <input type="submit" name="submit" value="Create Review" />
       </form>
-      <li><a href="{% url 'gamerate:add_review' %}">Add a Review </a></li>
     </div>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from gamerate.models import UserProfile, Game, Category
+from gamerate.models import UserProfile, Game, Category, Review
 from django.contrib.auth.models import User
 
 class UserForm(forms.ModelForm):
@@ -38,3 +38,10 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('name',)
+
+class ReviewForm(forms.ModelForm):
+    rating = forms.IntegerField(help_text="Please enter a your 5 star rating of the game.", required=True)
+    comment = forms.CharField(max_length=256,help_text="Please enter your review of the game.", required=True)
+    class Meta:
+        model = Review
+        exclude = ('user','game',)

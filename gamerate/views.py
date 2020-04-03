@@ -6,7 +6,7 @@ from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 
 from gamerate.models import Category, Game, Favourite, Review
-from gamerate.forms import UserForm, UserProfileForm, GameForm, CategoryForm
+from gamerate.forms import UserForm, UserProfileForm, GameForm, CategoryForm, ReviewForm
 
 def home(request):
     game_list = Game.objects.order_by('name')[:10]
@@ -136,6 +136,29 @@ def add_category(request):
         else:
             print(form.errors)
     return render(request, 'gamerate/add_category.html',{'form':form})
+
+def add_review(request, game_name_slug):
+    try:
+        game = Game.objects.get(slug=game_name_slug)
+    except Game.DoesNotExist:
+        game  = None
+    if game is None:
+        return redirect('/gamerate/home/')
+    form = ReviewForm()
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            if request.user.is_authenticated:
+                review.user = request.user;
+            if game:
+                review.game = game
+                review.save()
+                return redirect(reverse('gamerate:show_game',kwargs={'game_name_slug':game_name_slug}))
+        else:
+            print(form.errors)
+    context_dict = {'form': form, 'game': game}
+    return render(request, 'gamerate/add_review.html', context=context_dict)
 
 def show_game(request, game_name_slug):
     context_dict ={}

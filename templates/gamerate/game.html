@@ -23,6 +23,10 @@
     Description: {{game.description}}<br>
     age_rating: {{game.age_rating}}<br>
     Likes: {{game.likes}}
+    {% if user.is_authenticated %}
+    {% csrf_token %}
+      <a href="{% url 'gamerate:add_review' game.slug %}">Add Review</a> <br/>
+    {% endif %}
     </gamepagecontent>
 
   {% else %}

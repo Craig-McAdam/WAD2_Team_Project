@@ -16,5 +16,5 @@ urlpatterns = [
     path('category/<slug:category_name_slug>/', views.show_category, name='show_category'),
     path('add_game/', views.add_game, name='add_game'),
     path('add_category/', views.add_category, name='add_category'),
-
+    path('game/<slug:game_name_slug>/add_review/', views.add_review, name='add_review'),
 ]
