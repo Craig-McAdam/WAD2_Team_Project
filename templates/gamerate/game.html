@@ -1,0 +1,48 @@
+{% extends 'gamerate/base.html' %}
+
+{% block title_block %}
+    {% if game %}
+      {{game.name}}
+    {% else %}
+      Unknown Game
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+<div>
+  <gamepage>
+  {% if game %}
+    <li>{{game.name}}</li>
+    <img src="{{ MEDIA_URL }}{{ game.cover_art}}" alt="{{ game.cover_art}}" />
+    <gamepagecontent>
+    Release Date: {{game.release_date}}<br>
+    Category: {{game.category}}<br>
+    Game Sysyem: {{game.system}}<br>
+    Developer: {{game.developer}}<br>
+    Publisher: {{game.publisher}}<br>
+    Description: {{game.description}}<br>
+    age_rating: {{game.age_rating}}<br>
+    Likes: {{game.likes}}
+    </gamepagecontent>
+
+  {% else %}
+      The specified game does not exist.
+  {% endif %}
+  </gamepage>
+</div>
+{% endblock %}
+
+{% block sidebar_block %}
+{% if categories %}
+<ul>
+  {% for category in categories %}
+  <li>
+    <a href="{% url 'gamerate:show_category' category.slug %}">{{ category.name}}</a>
+  </li>
+  <br>
+  {% endfor %}
+</ul>
+{% else %}
+<strong> There are no categories present.</strong>
+{% endif %}
+{% endblock %}

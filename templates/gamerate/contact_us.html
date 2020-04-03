@@ -5,5 +5,20 @@
 {% endblock %}
 
 {% block body_block %}
-    placeholder
+    Email: 2389728y@student.gla.ac.uk
+{% endblock %}
+
+{% block sidebar_block %}
+{% if categories %}
+<ul>
+  {% for category in categories %}
+  <li>
+    <a href="{% url 'gamerate:show_category' category.slug %}">{{ category.name}}</a>
+  </li>
+  <br>
+  {% endfor %}
+</ul>
+{% else %}
+<strong> There are no categories present.</strong>
+{% endif %}
 {% endblock %}

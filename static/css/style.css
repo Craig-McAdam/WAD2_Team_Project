@@ -1,0 +1,134 @@
+body{
+  background: #aaaaaa;
+}
+
+.container{
+  width: 80%;
+  margin: 0 auto;
+}
+
+header div{
+  background: #2051a1;
+}
+
+header div::after{
+  content:'';
+  display: table;
+  clear: both;
+}
+
+.logo{
+  float: left;
+  padding: 10px;
+}
+strong{
+  float: left;
+  padding-left: 10px;
+  margin-top: 20px;
+  font-size: 150%;
+}
+
+topbar input[type=text]{
+  float: left;
+  padding: 5px;
+  border: none;
+  margin-top: 20px;
+  margin-left: 25px;
+}
+topbar ul{
+  float:right;
+  margin: 0;
+  padding: 0;
+  padding-right: 40px;
+  list-style: none;
+}
+topbar li{
+  display: inline-block;
+  margin-left: 25px;
+  padding-top: 25px;
+}
+topbar a{
+  color: #9e7d10;
+  text-decoration: none;
+}
+topbar a:hover{
+  color: #ffffff;
+}
+
+nav ul{
+  padding-left: 10px;
+}
+nav li{
+  display: inline-block;
+  margin-left: 30px;
+  padding-top: 20px;
+}
+nav a{
+  color: #9e7d10;
+  text-decoration: none;
+}
+nav a:hover{
+  color: #ffffff;
+}
+
+side{
+  background: #2051a1;
+  float: right;
+  padding-right: 30px;
+}
+side li{
+  display: inline-block;
+  padding-top: 15px;
+}
+side a{
+  color: #9e7d10;
+  font-size: 120%;
+  text-decoration: none;
+}
+side a:hover{
+  color: #ffffff;
+}
+
+game_display li{
+  display: inline-grid;
+  padding-top: 15px;
+}
+game_display a{
+  color: #9e7d10;
+  font-size: 120%;
+  text-decoration: none;
+  padding-right: 50px;
+}
+game_display a:hover{
+  color: #ffffff;
+}
+game_display img{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+gamepage li{
+  list-style-type: none;
+}
+gamepage img{
+  float: left;
+}
+gamepagecontent {
+  display: inline-grid;
+  font-size: 120%;
+
+  width: 500px;
+  padding: 50px;
+  border: 5px solid gray;
+  margin: 0;
+}
+gamepage img{
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 250px;
+}
+register{
+
+}

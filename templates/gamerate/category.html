@@ -1,0 +1,43 @@
+{% extends 'gamerate/base.html' %}
+
+{% block title_block %}
+  {% if category %}
+    {{category.name}}
+  {% else %}
+    Unknown Category
+  {% endif %}
+{% endblock %}
+
+{% block body_block %}
+<div>
+  {% if category %}
+    <h1>{{category.name}}</h1>
+  {% if games %}
+  <ul>
+    {% for game in games %}
+    <li><a href="{% url 'gamerate:show_game' game.slug %}">{{ game.name}}</a></li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <strong> No games in category. </strong>
+  {% endif %}
+  {% else %}
+      The specified category does not exist.
+  {% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar_block %}
+{% if categories %}
+<ul>
+  {% for category in categories %}
+  <li>
+    <a href="{% url 'gamerate:show_category' category.slug %}">{{ category.name}}</a>
+  </li>
+  <br>
+  {% endfor %}
+</ul>
+{% else %}
+<strong> There are no categories present.</strong>
+{% endif %}
+{% endblock %}

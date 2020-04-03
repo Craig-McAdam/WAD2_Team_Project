@@ -3,30 +3,45 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
-# from gamerate.models import ...
-from gamerate.forms import UserForm, UserProfileForm
+from gamerate.models import Category, Game, Favourite, Review
+from gamerate.forms import UserForm, UserProfileForm, GameForm, CategoryForm
 
 def home(request):
+    game_list = Game.objects.order_by('name')[:10]
+    category_list = Category.objects.order_by('name')[:10]
     context_dict = {}
+    context_dict['games'] = game_list
+    context_dict['categories'] = category_list
     response = render(request, 'gamerate/home.html', context=context_dict)
     return response
 
 
 def most_popular(request):
     context_dict = {}
+    game_list = Game.objects.order_by('-likes')[:10]
+    context_dict['games'] = game_list
+    category_list = Category.objects.order_by('name')[:10]
+    context_dict['categories'] = category_list
     response = render(request, 'gamerate/most_popular.html', context=context_dict)
     return response
 
 
 def highest_rated(request):
     context_dict = {}
+    game_list = Game.objects.order_by('-likes')[:10]
+    context_dict['games'] = game_list
+    category_list = Category.objects.order_by('name')[:10]
+    context_dict['categories'] = category_list
     response = render(request, 'gamerate/highest_rated.html', context=context_dict)
     return response
 
 
 def contact_us(request):
     context_dict = {}
+    category_list = Category.objects.order_by('name')[:10]
+    context_dict['categories'] = category_list
     response = render(request, 'gamerate/contact_us.html', context=context_dict)
     return response
 
@@ -94,20 +109,55 @@ def user_logout(request):
 
 def my_account(request):
     context_dict = {}
+    category_list = Category.objects.order_by('name')[:10]
+    context_dict['categories'] = category_list
     response = render(request, 'gamerate/my_account.html', context=context_dict)
     return response
 
 
 def add_game(request):
-    context_dict = {}
-    response = render(request, 'gamerate/add_game.html', context=context_dict)
-    return response
+    form = GameForm()
+    if request.method =='POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/gamerate/home/')
+        else:
+            print(form.errors)
+    return render(request, 'gamerate/add_game.html',{'form':form})
 
-# views and templates needed for category pages
+def add_category(request):
+    form = CategoryForm()
+    if request.method =='POST':
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect('/gamerate/home/')
+        else:
+            print(form.errors)
+    return render(request, 'gamerate/add_category.html',{'form':form})
 
-# remove before final submission
-def testing(request):
-    # space to test code
-    context_dict = {}
-    response = render(request, 'gamerate/testing.html', context=context_dict)
-    return response
+def show_game(request, game_name_slug):
+    context_dict ={}
+    category_list = Category.objects.order_by('name')[:10]
+    context_dict['categories'] = category_list
+    try:
+        game = Game.objects.get(slug=game_name_slug)
+        context_dict['game'] = game
+    except Game.DoesNotExist:
+        context_dict['game'] = None
+    return render(request,'gamerate/game.html', context=context_dict)
+
+def show_category(request, category_name_slug):
+    context_dict ={}
+    category_list = Category.objects.order_by('name')[:10]
+    context_dict['categories'] = category_list
+    try:
+        category = Category.objects.get(slug=category_name_slug)
+        games = Game.objects.filter(category=category)
+        context_dict['category'] = category
+        context_dict['games'] = games
+    except Category.DoesNotExist:
+        context_dict['category'] = None
+        context_dict['games'] = None
+    return render(request,'gamerate/category.html', context=context_dict)

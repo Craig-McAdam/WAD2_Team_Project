@@ -1,4 +1,5 @@
 from django.urls import path
+from django.conf.urls import url
 from gamerate import views
 
 app_name = 'gamerate'
@@ -11,8 +12,9 @@ urlpatterns = [
     path('register/', views.user_registration, name='register'),
     path('login/', views.user_login, name='login'),
     path('logout/', views.user_logout, name='logout'),
-    # path needed for my_account
-    # path needed for add_game
-    # paths needed for category pages
+    path('game/<slug:game_name_slug>/', views.show_game, name='show_game'),
+    path('category/<slug:category_name_slug>/', views.show_category, name='show_category'),
+    path('add_game/', views.add_game, name='add_game'),
+    path('add_category/', views.add_category, name='add_category'),
 
 ]

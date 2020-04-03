@@ -4,50 +4,76 @@
 <!--{load GameRate_template_tags %}-->
 
 <html lang="en">
-
     <head>
         <!-- Required meta tags-->
         <meta charset="UTF-8">
-
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="css/bootstrap.min.css">
-
+        <link rel="stylesheet"  type="text/css" href="{% static 'css/style.css' %}">
         <title>
             GameRate -
             {% block title_block %}
                 <!-- page title goes here -->
             {% endblock %}
         </title>
-    
     </head>
 
-    <body>
-        
-        <div>
-            {% block header_block %}
-                <img src="{% static 'images/controller.PNG' %}"
-                alt="GameRate logo" />
-            {% endblock %}
-        </div>
+    <header>
+      <div>
+          {% block header_block %}
+              <img src="{% static 'images/controller.PNG' %}" alt="GameRate logo" class="logo"/>
+              <strong>GameRate</strong>
+              <topbar>
+                <input type="text" placeholder="Search...">
+                <ul>
+                  {% if user.is_authenticated %}
+                  <li>Username: {{request.user.username}}</li>
+                  <li><a href="/gamerate/logout/">Logout</a></li>
+                  {% else %}
+                  <li><a href="{% url 'gamerate:register' %}">Register </a></li>
+                  <li><a href="/gamerate/login/">Login </a></li>
+                  {% endif %}
+                </ul>
+              </topbar>
+          {% endblock %}
+      </div>
+      <div>
+        <nav>
+          <ul>
+            <li><a href={% url 'gamerate:home' %}>Home </a> </li>
+            <li><a href="/gamerate/most-popular/">Most Popular </a></li>
+            {% if user.is_authenticated %}
+            <li><a href="#">Favourites</a></li>
+            <li><a href="/gamerate/add_game/">Add a New Game</a></li>
+            <li><a href="/gamerate/add_category/">Add a New Category</a></li>
+            {% endif %}
+            <li><a href="/gamerate/contact-us/">Contact Us </a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
 
-        <div>
+    <body>
+      <br>
+        <side>
+          <div>
             {% block sidebar_block %}
-                <!-- Sidebar and categories links go here -->
             {% endblock %}
-        </div>
+          </div>
+        </side>
 
         <div>
             {% block body_block %}
                 <!-- page content goes here -->
             {% endblock %}
         </div>
-
-        <div>
-            {% block footer_block %}
-                <!-- footer goes here-->
-            {% endblock %}
-        </div>
-
     </body>
+
+    <footer>
+      <div>
+          {% block footer_block %}
+              <!-- footer goes here-->
+          {% endblock %}
+      </div>
+    </footer>
 
 </html>
